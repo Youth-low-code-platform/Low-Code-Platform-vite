@@ -28,6 +28,3 @@ else
   echo "npm 版本:$npmVersion"
   echo $(which npm)
 fi
-
-npx lint-staged 
-
