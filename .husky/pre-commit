@@ -29,4 +29,4 @@ else
   echo $(which npm)
 fi
 
-npx --no --lint-staged
+npx lint-staged
