@@ -1,0 +1,38 @@
+$canvasWidth: 320px;
+$canvasHeigh: 568px;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 20px;
+}
+
+#designer-page {
+  position: relative;
+  display: flex;
+
+  .plugin-panel {
+    width: 100%;
+    height: 100%;
+    padding: 4px 8px 4px 0;
+    border: 1px solid #ebeef5;
+
+    .plugin-item {
+      width: 49%;
+      height: 60px;
+      padding: 12px;
+      border: 1px solid #f1efef;
+    }
+  }
+
+  .canvas-wrapper {
+    position: relative;
+    top: 5%;
+    width: $canvasWidth;
+    height: $canvasHeigh;
+    margin: 0 auto;
+    border: 1px solid #ebeaea;
+  }
+}

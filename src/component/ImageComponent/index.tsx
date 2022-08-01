@@ -1,0 +1,29 @@
+import { ComponentProps } from '@//types/component.type';
+// import { IImageEditConfig } from '@//types/editConfig.type';
+import {  ComponentSchema, IPictureComponent } from '@//types/lowCodeCompo.type';
+import { CSSProperties } from 'react';
+import { getEditComponent } from '../edit-component/base';
+
+
+// ImageCompo根据schema动态生成
+export const ImageComponent:React.FC<ComponentProps>=({schema})=>{
+  const  {props,id,style}=schema as IPictureComponent
+  return (
+     <img key={id}  style={{...(style as CSSProperties),height:'100%',width:'100%'}} src={props.imgSrc}  />
+ )
+}
+
+// 获取并配置image组件的编辑栏
+export const getImageConfigComponents =(editingCompo: ComponentSchema,components:ComponentSchema[],setComponents:React.Dispatch<React.SetStateAction<ComponentSchema[]>>)=>{
+  const editorConfig  = (editingCompo as IPictureComponent).editConfig
+  const imageConfig = editorConfig.imgSrc
+  // 配置回调函数
+    const callback = (val:string)=>{
+      (editingCompo as IPictureComponent).props.imgSrc=val;
+      (editingCompo as IPictureComponent).editConfig.imgSrc.value=val
+      setComponents(components.slice())
+    }
+    imageConfig.callback= callback
+    const imageConfigCompo= getEditComponent(imageConfig)
+    return [imageConfigCompo]
+} 
