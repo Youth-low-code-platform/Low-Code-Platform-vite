@@ -1,5 +1,5 @@
 import React from 'react'
-import { DraggableItemKey } from '../constants/plugin-icon-list'
+// import { DraggableItemKey } from '../constants/plugin-icon-list'
 import { IButtonEditConfig, IImageEditConfig } from './editConfig.type'
 
 export enum ComponentName {
@@ -52,7 +52,7 @@ export interface IButtonComponent {
 export interface IPluginListIcon {
   icon: React.ReactNode
   text: string
-  compKey: DraggableItemKey
+  compKey: ComponentName
 }
 
 // 将所有组件的数据联合起来
