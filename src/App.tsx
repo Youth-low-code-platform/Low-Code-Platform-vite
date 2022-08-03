@@ -9,6 +9,7 @@ import { PLUGIN_LIST } from './constants/plugin-icon-list'
 import { DragButtonProp } from './component/pluginListPanel/draggable-btn'
 import { useDrop } from 'react-dnd'
 import { IDragIcon } from './types/dragIcon.type'
+import { Shape } from './component/shape'
 
 const TabPane = Tabs.TabPane
 
@@ -17,10 +18,8 @@ function Editor() {
   const [editingCompo, setEditingCompo] = useState<ComponentSchema | null>(null)
   const [reRender, setReRender] = useState(false)
   // 添加组件数据至数组中
-  console.log(reRender)
 
   const clone = (conKey: ComponentName) => {
-    console.log(conKey)
     const schema = getComponentSchema(conKey)
     setComponents((components) => [...components, schema])
   }
@@ -65,7 +64,9 @@ function Editor() {
                 style={{ ...(schema.style as CSSProperties), display: 'inline-block' }}
                 key={`compo-${index}`}
               >
-                <ImageComponent schema={schema}></ImageComponent>
+                <Shape component={schema} editingCompo={editingCompo} reRender={reRender} setReRender={setReRender}>
+                  <ImageComponent schema={schema}></ImageComponent>
+                </Shape>
               </div>
             )
           }

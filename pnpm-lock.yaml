@@ -26,6 +26,7 @@ specifiers:
   eslint-plugin-simple-import-sort: ^7.0.0
   husky: ^8.0.1
   lint-staged: ^13.0.3
+  postcss-less: ^6.0.0
   prettier: 2.7.1
   react: ^18.2.0
   react-beautiful-dnd: ^13.1.0
@@ -85,6 +86,7 @@ devDependencies:
   eslint-plugin-simple-import-sort: 7.0.0_eslint@8.20.0
   husky: 8.0.1
   lint-staged: 13.0.3
+  postcss-less: registry.npmmirror.com/postcss-less/6.0.0
   prettier: 2.7.1
   sass: 1.54.0
   stylelint: 14.9.1
@@ -8791,6 +8793,15 @@ packages:
     engines: {node: '>=6.14.4'}
     dependencies:
       postcss: registry.npmmirror.com/postcss/7.0.39
+    dev: true
+
+  registry.npmmirror.com/postcss-less/6.0.0:
+    resolution: {integrity: sha512-FPX16mQLyEjLzEuuJtxA8X3ejDLNGGEG503d2YGZR5Ask1SpDN8KmZUMpzCvyalWRywAn1n1VOA5dcqfCLo5rg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/postcss-less/-/postcss-less-6.0.0.tgz}
+    name: postcss-less
+    version: 6.0.0
+    engines: {node: '>=12'}
+    peerDependencies:
+      postcss: ^8.3.5
     dev: true
 
   registry.npmmirror.com/postcss/6.0.23:

@@ -16,6 +16,7 @@ export interface IPictureComponent {
   // 编辑器的属性
   editConfig: IImageEditConfig
   style: {
+    position: string
     top: string
     left: string
     width: string
@@ -36,6 +37,7 @@ export interface IButtonComponent {
   // 编辑器的属性
   editConfig: IButtonEditConfig
   style: {
+    position: string
     top: string
     left: string
     width: string

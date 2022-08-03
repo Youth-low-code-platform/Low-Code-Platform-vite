@@ -34,5 +34,15 @@ body {
     height: $canvasHeigh;
     margin: 0 auto;
     border: 1px solid #ebeaea;
+
+    .shape-point {
+      position: absolute;
+      z-index: 1;
+      width: 6px;
+      height: 6px;
+      background: #fff;
+      border: 1px solid #70c0ff;
+      border-radius: 50%;
+    }
   }
 }

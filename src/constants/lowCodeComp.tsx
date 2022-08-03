@@ -22,6 +22,7 @@ export const getComponentSchema = (name: ComponentName): ComponentSchema | null 
           }
         },
         style: {
+          position: 'absolute',
           top: '100px',
           left: '100px',
           width: '100px',
@@ -51,6 +52,7 @@ export const getComponentSchema = (name: ComponentName): ComponentSchema | null 
           }
         },
         style: {
+          position: 'absolute',
           top: '100px',
           left: '100px',
           width: '100px',
