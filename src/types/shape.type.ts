@@ -3,8 +3,8 @@ import { ComponentSchema } from './lowCodeCompo.type'
 
 export interface IFCShapeProps {
   component: ComponentSchema
-  editingCompo: ComponentSchema
-  reRender: boolean
+  editingCompo: ComponentSchema | null | undefined
+  reRender: boolean | undefined
   children: JSX.Element
   setReRender: React.Dispatch<React.SetStateAction<boolean>>
 }

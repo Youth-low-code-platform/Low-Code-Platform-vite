@@ -17,10 +17,10 @@ export const Shape: React.FC<IFCShapeProps> = (props: IFCShapeProps) => {
   const active = component === editingCompo
   const style = component?.style
   const position: IShapeCommonStyle = {
-    top: parseInt(style?.top as string),
-    left: parseInt(style?.left as string),
-    width: parseInt(style?.width as string),
-    height: parseInt(style?.height as string)
+    top: parseInt(style.top),
+    left: parseInt(style.left),
+    width: parseInt(style.width),
+    height: parseInt(style.height)
   }
 
   // 获取伸缩点的样式
@@ -100,32 +100,28 @@ export const Shape: React.FC<IFCShapeProps> = (props: IFCShapeProps) => {
 
       const newHight = height + (hasT ? -disY : hasB ? disY : 0)
       const newWidth = width + (hasL ? -disX : hasR ? disX : 0)
-      pos.width = newWidth>0?newWidth:0
-      pos.height = newHight>0?newHight:0
-      pos.left = left+(hasL?disX:0)
-      pos.top = top +(hasT?disY:0)
-      if(hasT){
-        if(pos.top<0)return true
-      }
-      else if(hasB){
-        if(pos.top>568-pos.height)return true
-      }
-      else if(hasL){
-        if(pos.left<0)return true
-      }
-      else if(hasR){
-        if(pos.left>320 - pos.width)return true
+      pos.width = newWidth > 0 ? newWidth : 0
+      pos.height = newHight > 0 ? newHight : 0
+      pos.left = left + (hasL ? disX : 0)
+      pos.top = top + (hasT ? disY : 0)
+      if (hasT) {
+        if (pos.top < 0) return true
+      } else if (hasB) {
+        if (pos.top > 568 - pos.height) return true
+      } else if (hasL) {
+        if (pos.left < 0) return true
+      } else if (hasR) {
+        if (pos.left > 320 - pos.width) return true
       }
       setCompoPosition(pos)
     }
-    const up = ()=>{
-      document.removeEventListener('mousemove',move)
-      document.removeEventListener('mouseup',up)
+    const up = () => {
+      document.removeEventListener('mousemove', move)
+      document.removeEventListener('mouseup', up)
     }
-    document.addEventListener('mousemove',move)
-    document.addEventListener('mouseup',up)
+    document.addEventListener('mousemove', move)
+    document.addEventListener('mouseup', up)
   }
-
 
   // 实现拖拽功能
   function mouseDownForElement(e: React.MouseEvent) {
@@ -157,11 +153,9 @@ export const Shape: React.FC<IFCShapeProps> = (props: IFCShapeProps) => {
     document.addEventListener('mouseup', up, true)
   }
 
-
   function setCompoPosition(pos: IShapeCommonStyle) {
     // 修改坐标
     if (component?.style) {
-      
       component.style.top = pos.top + 'px'
       component.style.left = pos.left + 'px'
       component.style.height = pos.height + 'px'
@@ -174,11 +168,22 @@ export const Shape: React.FC<IFCShapeProps> = (props: IFCShapeProps) => {
   }
 
   return (
-    <div onMouseDown={(e)=>mouseDownForElement(e)} style={{ outline: active ? '1px dashed #bcbcbc' : '',height:'100%',width:'100%' }}>
+    <div
+      onMouseDown={(e) => mouseDownForElement(e)}
+      style={{ outline: active ? '1px dashed #bcbcbc' : '', height: '100%', width: '100%' }}
+    >
       {active &&
         points.map((point) => {
           const pointStyle = getPointStyle(point)
-          return <div key={point} data-point={point} style={pointStyle} className="shape-point" onMouseDown={(e)=>mouseDownForPoint(point,e)}></div>
+          return (
+            <div
+              key={point}
+              data-point={point}
+              style={pointStyle}
+              className="shape-point"
+              onMouseDown={(e) => mouseDownForPoint(point, e)}
+            ></div>
+          )
         })}
       {children}
     </div>

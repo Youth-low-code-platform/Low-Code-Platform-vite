@@ -1,4 +1,5 @@
-import { ComponentName, IPluginListIcon } from '@//types/lowCodeCompo.type'
+import { ComponentName } from '@//types/lowCodeCompo.type'
+import { IPluginListIcon } from '@//types/pluginList.type'
 import Button from '@arco-design/web-react/es/Button'
 import { useDrag } from 'react-dnd'
 

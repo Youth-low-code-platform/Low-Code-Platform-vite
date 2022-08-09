@@ -1,4 +1,3 @@
-import React from 'react'
 // import { DraggableItemKey } from '../constants/plugin-icon-list'
 import { IButtonEditConfig, IImageEditConfig } from './editConfig.type'
 
@@ -23,6 +22,7 @@ interface ComponentStyle {
 export interface IPictureComponent {
   id: string
   name: ComponentName.PictureComponent
+  getComponent: (schema: ComponentSchema) => JSX.Element
   props: {
     imgSrc: string
   }
@@ -36,17 +36,11 @@ export interface IButtonComponent {
   props: {
     text: string
   }
+  getComponent: (schema: ComponentSchema | undefined) => JSX.Element
   // 编辑器的属性
   editConfig: IButtonEditConfig
   style: ComponentStyle
 }
 
-// 组件栏图标
-export interface IPluginListIcon {
-  icon: React.ReactNode
-  text: string
-  compKey: ComponentName
-}
-
 // 将所有组件的数据联合起来
-export type ComponentSchema = IPictureComponent | IButtonComponent | null
+export type ComponentSchema = IPictureComponent | IButtonComponent
