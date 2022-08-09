@@ -7,6 +7,19 @@ export enum ComponentName {
   ButtonComponent = 'ButtonComponent'
 }
 
+interface ComponentStyle {
+  position: string
+  top: string
+  left: string
+  width: string
+  height: string
+  zIndex: number
+  textAlign: string
+  color: string
+  backgroundColor: string
+  fontSize: string
+}
+
 export interface IPictureComponent {
   id: string
   name: ComponentName.PictureComponent
@@ -15,18 +28,7 @@ export interface IPictureComponent {
   }
   // 编辑器的属性
   editConfig: IImageEditConfig
-  style: {
-    position: string
-    top: string
-    left: string
-    width: string
-    height: string
-    zIndex: number
-    textAlign: string
-    color: string
-    backgroundColor: string
-    fontSize: string
-  }
+  style: ComponentStyle
 }
 export interface IButtonComponent {
   id: string
@@ -36,18 +38,7 @@ export interface IButtonComponent {
   }
   // 编辑器的属性
   editConfig: IButtonEditConfig
-  style: {
-    position: string
-    top: string
-    left: string
-    width: string
-    height: string
-    zIndex: number
-    textAlign: string
-    color: string
-    backgroundColor: string
-    fontSize: string
-  }
+  style: ComponentStyle
 }
 
 // 组件栏图标

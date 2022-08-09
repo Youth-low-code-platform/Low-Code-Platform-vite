@@ -6,7 +6,7 @@ import { ComponentName, ComponentSchema } from './types/lowCodeCompo.type'
 import { getComponentSchema } from './constants/lowCodeComp'
 import { getImageConfigComponents, ImageComponent } from './component/ImageComponent'
 import { PLUGIN_LIST } from './constants/plugin-icon-list'
-import { DragButtonProp } from './component/pluginListPanel/draggable-btn'
+import { DragButton } from './component/pluginListPanel/draggable-btn'
 import { useDrop } from 'react-dnd'
 import { IDragIcon } from './types/dragIcon.type'
 import { Shape } from './component/shape'
@@ -34,7 +34,7 @@ function Editor() {
   }))
 
   //左侧组件列表
-  function renderPluginListPanel() {
+  function PluginListPanel() {
     return (
       <Tabs className={'plugin-panel'} tabPosition={'left'}>
         <TabPane key="pluginList" title="组件列表">
@@ -42,7 +42,7 @@ function Editor() {
             // 遍历所有的图标
             PLUGIN_LIST.map((compoIcon, index) => {
               const cb = () => clone(compoIcon.compKey)
-              return DragButtonProp({ compoIcon, cb, index })
+              return DragButton({ compoIcon, cb, index })
             })
           }
         </TabPane>
@@ -51,7 +51,7 @@ function Editor() {
   }
 
   // 画布
-  function renderCanvas() {
+  function Canvas() {
     return (
       <div ref={drop} style={{ height: '100%', border: isOver ? '5px solid lightblue' : '0px' }}>
         {components.map((componentSchema, index) => {
@@ -88,9 +88,9 @@ function Editor() {
 
   return (
     <div id="designer-page">
-      <div className="arco-col arco-col-5">{renderPluginListPanel()}</div>
+      <div className="arco-col arco-col-5"><PluginListPanel></PluginListPanel></div>
       <div className="arco-col arco-col-13">
-        <div className="canvas-wrapper">{renderCanvas()}</div>
+        <div className="canvas-wrapper"><Canvas></Canvas></div>
       </div>
       <div className="arco-col arco-col-6" style={{ border: ' 1px solid #f1efef' }}>
         {renderPropsEditorPanel()}

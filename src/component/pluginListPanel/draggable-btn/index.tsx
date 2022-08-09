@@ -8,7 +8,7 @@ export interface DragButtonProps {
   index: number
 }
 
-export function DragButtonProp(props: DragButtonProps) {
+export function DragButton(props: DragButtonProps) {
   const { compoIcon, index } = props
   const [{ isDragging }, drag] = useDrag(() => ({
     type: 'DragIcon',
