@@ -1,27 +1,26 @@
-import { ComponentSchema, IPictureComponent } from '@//types/lowCodeCompo.type'
-import { getEditComponent } from '../../edit-component/base'
+import { EditComponentKey } from '@//types/editbase.type'
+import { ComponentName, ComponentSchema, ComponentStyle, IPictureComponent } from '@//types/lowCodeCompo.type'
 
-// 获取并配置image组件的编辑栏
-export const getImageConfigComponents = (
-  editingCompo: ComponentSchema,
-  reRender: boolean,
-  setReRender: React.Dispatch<React.SetStateAction<boolean>>
-) => {
-  const editorConfig = (editingCompo as IPictureComponent).editConfig
-  const imageConfig = editorConfig.imgSrc
-  // 配置回调函数
-  const callback = (val: string) => {
-    ;(editingCompo as IPictureComponent).editConfig.imgSrc.value = val
-    ;(editingCompo as IPictureComponent).props.imgSrc = val
-    // 修改render使得页面数据刷新
-    setReRender(() => {
-      console.log('页面更新成功')
-      return !reRender
-    })
+export const pictureSchema = (id: string, defaultStyle: ComponentStyle): ComponentSchema => {
+  return {
+    id,
+    name: ComponentName.PictureComponent,
+    getComponent: (schema: ComponentSchema | undefined) => {
+      const { props, id } = schema as IPictureComponent
+      return <img key={id} style={{ height: '100%', width: '100%' }} src={props.imgSrc} />
+    },
+    props: {
+      imgSrc: 'src/assets/default-pic.jpg'
+    },
+    editConfig: {
+      imgSrc: {
+        name: EditComponentKey.EDIT_INPUT,
+        propType: 'textarea',
+        label: '图片url',
+        value: 'src/assets/default-pic.jpg',
+        callback: null
+      }
+    },
+    style: { ...defaultStyle }
   }
-  imageConfig.callback = callback
-  // 用于标识唯一值
-  const keyValue = 'imgConfig'
-  const imageConfigCompo = getEditComponent(imageConfig, keyValue)
-  return [imageConfigCompo]
 }

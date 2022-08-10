@@ -29,7 +29,7 @@ const AInput: React.FC<EditConfig> = ({ editConfig }) => {
   )
 }
 
-export const getEditComponent = (editConfig: EditComponentProps, keyVal: string): JSX.Element | null => {
+export const getEditComponent = (editConfig: EditComponentProps, keyVal: string): JSX.Element => {
   switch (editConfig.name) {
     case EditComponentKey.EDIT_INPUT: {
       return (
@@ -39,6 +39,6 @@ export const getEditComponent = (editConfig: EditComponentProps, keyVal: string)
       )
     }
     default:
-      return null
+      return <FormItem key="null" label="空属性"></FormItem>
   }
 }

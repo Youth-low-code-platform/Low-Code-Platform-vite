@@ -1,18 +1,18 @@
 import { context } from '@//App'
 import { ComponentName } from '@//types/lowCodeCompo.type'
-import { Form } from '@arco-design/web-react'
+// import { Form } from '@arco-design/web-react'
 import { useContext } from 'react'
-import { getImageConfigComponents } from '../plugins/ImageComponent'
+import { ImageConfigComponents } from '../plugins/ImageComponent/edit-config'
 
 // 编辑栏
 export function PropsEditorPanel() {
-  const { editingCompo, reRender, setReRender } = useContext(context)
+  const { editingCompo, setReRender } = useContext(context)
 
   if (editingCompo && setReRender) {
     // 根据组件编辑栏名称进行
     switch (editingCompo.name) {
       case ComponentName.PictureComponent: {
-        return <Form>{getImageConfigComponents(editingCompo, reRender as boolean, setReRender)}</Form>
+        return <ImageConfigComponents />
       }
       default:
         return <div>No Context</div>

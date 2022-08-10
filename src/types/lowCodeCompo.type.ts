@@ -6,7 +6,7 @@ export enum ComponentName {
   ButtonComponent = 'ButtonComponent'
 }
 
-interface ComponentStyle {
+export interface ComponentStyle {
   position: string
   top: string
   left: string
