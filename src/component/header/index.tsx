@@ -2,7 +2,11 @@ import { IPageInfo } from '@//types';
 import { Button, Descriptions, Form, Input, Layout, Modal, Select } from '@arco-design/web-react';
 import { IconEdit } from '@arco-design/web-react/icon';
 import React, { useContext, useEffect, useState } from 'react'
-import { context } from '../../App'
+import { context } from '@//views/editor'
+import { updatePage } from '@//utils/strapi'
+import { BASE_URL } from '@//constants/env'
+
+
 import './style.scss'
 
 const Header = Layout.Header;
@@ -11,10 +15,22 @@ const FormItem = Form.Item;
 const emptyNode = () => <span className='empty'>未设置</span>
 
 export const LowCodeHeader = () => {
-  const { pageInfo, setPageInfo } = useContext(context)
+  const { pageInfo, setPageInfo, params, components } = useContext(context)
   const [ headerInfo, setHeaderInfo ] = useState<Array<{label: string, value: string | React.ReactNode}>>([])
   const [form] = Form.useForm()
 
+
+  const  _updatePage=async () => {
+    if (params?.id) {
+      await updatePage(+params.id, components)
+    }
+  }
+
+
+  const previewPage = () => {
+    const url = `${BASE_URL}/preview/${params?.id}`
+    window.open(url, '_blank', 'noopener,noreferrer')
+  }
   useEffect(() => {
     const tempHeaderInfo = [
       {
@@ -69,8 +85,19 @@ export const LowCodeHeader = () => {
         <IconEdit className='edit' onClick={handleEdit} />
       </div>
       <div className='btn-group'>
-        <Button type='primary'>保存</Button>
-        <Button type='secondary'>发布</Button>
+      <Button
+          onClick={ ()=> _updatePage()}
+          type="primary"
+        >
+          保存
+        </Button>
+        <Button
+          onClick={()=>previewPage()}
+          status="warning"
+        >
+          预览
+        </Button>
+        <Button type="secondary">发布</Button>
       </div>
     </Header>
   )

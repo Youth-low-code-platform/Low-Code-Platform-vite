@@ -1,4 +1,4 @@
-import { context } from '@//App'
+import { context } from '@//views/editor'
 import { IImageEditConfig } from '@//types/editConfig.type'
 import { IPictureComponent } from '@//types/lowCodeCompo.type'
 import { Form } from '@arco-design/web-react'

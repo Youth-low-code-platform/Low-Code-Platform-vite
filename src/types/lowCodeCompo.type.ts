@@ -22,7 +22,6 @@ export interface ComponentStyle {
 export interface IPictureComponent {
   id: string
   name: ComponentName.PictureComponent
-  getComponent: (schema: ComponentSchema) => JSX.Element
   props: {
     imgSrc: string
   }
@@ -36,7 +35,6 @@ export interface IButtonComponent {
   props: {
     text: string
   }
-  getComponent: (schema: ComponentSchema | undefined) => JSX.Element
   // 编辑器的属性
   editConfig: IButtonEditConfig
   style: ComponentStyle

@@ -1,4 +1,4 @@
-import { context } from '@//App'
+import { context } from '@//views/editor'
 import { IDragIcon } from '@//types/pluginList.type'
 import { ComponentName } from '@//types/lowCodeCompo.type'
 import { CSSProperties, useContext } from 'react'
@@ -7,6 +7,7 @@ import { useDrop } from 'react-dnd'
 // import { ImageComponent } from '../plugins/ImageComponent'
 import { Shape } from '../shape'
 import './style.scss'
+import { getComponent } from '../plugins/plugins'
 
 // 画布
 export function Canvas() {
@@ -22,7 +23,7 @@ export function Canvas() {
 
   if (components && setEditingCompo && setReRender) {
     return (
-      <div className={classNames('canvas-wrapper', {over: isOver})} ref={drop}>
+      <div className={classNames('canvas-wrapper', { over: isOver })} ref={drop}>
         {components.map((componentSchema, index) => {
           const schema = componentSchema
           // 根据schema的名称进行相应的渲染
@@ -33,7 +34,7 @@ export function Canvas() {
               key={`compo-${index}`}
             >
               <Shape component={schema} editingCompo={editingCompo} reRender={reRender} setReRender={setReRender}>
-                {schema.getComponent(schema)}
+                {getComponent(schema)}
               </Shape>
             </div>
           )

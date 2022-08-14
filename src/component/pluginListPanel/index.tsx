@@ -1,4 +1,4 @@
-import { context } from '@//App'
+import { context } from '@//views/editor'
 import { PLUGIN_LIST } from '@//constants/plugin-icon-list'
 import { Card, Collapse, Layout } from '@arco-design/web-react'
 // import TabPane from '@arco-design/web-react/es/Tabs/tab-pane'

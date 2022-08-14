@@ -1,5 +1,5 @@
-import { ComponentName, ComponentSchema } from '../../types/lowCodeCompo.type'
-import { pictureSchema } from './ImageComponent'
+import { ComponentName, ComponentSchema, IButtonComponent, IPictureComponent } from '../../types/lowCodeCompo.type'
+import { getPicComponent, pictureSchema } from './ImageComponent'
 
 const defaultStyle = {
   position: 'absolute',
@@ -24,5 +24,22 @@ export const getComponentSchema = (name: ComponentName): ComponentSchema => {
     case ComponentName.ButtonComponent: {
       return pictureSchema(id, defaultStyle)
     }
+  }
+}
+
+// 根据schema获取渲染组件
+export const getComponent = (schema: ComponentSchema | undefined): JSX.Element => {
+  const name = schema?.name
+  switch (name) {
+    case ComponentName.PictureComponent: {
+      const picSchema = schema as IPictureComponent
+      return getPicComponent(picSchema)
+    }
+    case ComponentName.ButtonComponent: {
+      const picSchema = schema as IButtonComponent
+      return getPicComponent(picSchema)
+    }
+    default:
+      return <></>
   }
 }

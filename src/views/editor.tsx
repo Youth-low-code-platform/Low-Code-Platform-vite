@@ -1,18 +1,20 @@
 import '@arco-design/web-react/dist/css/arco.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import classNames from 'classnames'
-import { ComponentName, ComponentSchema } from './types/lowCodeCompo.type'
-import { getComponentSchema } from './component/plugins/plugins'
+import { ComponentName, ComponentSchema } from '../types/lowCodeCompo.type'
+import { getComponentSchema } from '../component/plugins/plugins'
 
 import React from 'react'
-import { Canvas } from './component/canvas'
+import { Canvas } from '../component/canvas'
 
-import { PluginListPanel } from './component/pluginListPanel'
-import { PropsEditorPanel } from './component/editor-panel'
+import { PluginListPanel } from '../component/pluginListPanel'
+import { PropsEditorPanel } from '../component/editor-panel'
 import { Layout } from '@arco-design/web-react'
-import { IPageInfo } from './types'
-import { LowCodeHeader } from './component/header'
+import { IPageInfo } from '../types'
+import { LowCodeHeader } from '../component/header'
 import Content from '@arco-design/web-react/es/Layout/content'
+import { Params, useNavigate, useParams } from 'react-router'
+import { createPage, findPage } from '../utils/strapi'
 
 // const TabPane = Tabs.TabPane
 
@@ -29,16 +31,33 @@ export const context = React.createContext<
     clone: (conKey: ComponentName) => void
     pageInfo: IPageInfo | null
     setPageInfo: Dispatch<IPageInfo | null>
+    params: Readonly<Params<string>>
   }>
 >({})
 
-function Editor() {
+export function Editor() {
   const [components, setComponents] = useState<ComponentSchema[]>([])
   const [editingCompo, setEditingCompo] = useState<ComponentSchema | null>(null)
   const [reRender, setReRender] = useState(false)
   const [pageInfo, setPageInfo] = useState<IPageInfo | null>(null)
-  // 添加组件数据至数组中
+  const params = useParams()
+  const navigate = useNavigate()
 
+  useEffect(() => {
+    if (params.id) {
+      // 获取页面数据
+      findPage(+params.id).then(
+        (components) => {
+          setComponents(components)
+        },
+        () => {
+          // 新建页面，并且重定向至新建页面
+          void createPage(navigate)
+        }
+      )
+    }
+  }, [params.id])
+  // 添加组件数据至数组中
   const clone = (conKey: ComponentName) => {
     const schema = getComponentSchema(conKey)
     setComponents((components) => [...components, schema])
@@ -55,13 +74,16 @@ function Editor() {
         setReRender,
         clone,
         pageInfo,
-        setPageInfo
+        setPageInfo,
+        params
       }}
     >
       <LowCodeHeader />
-      <Layout className='low-code-layout'>
+      <Layout className="low-code-layout">
         <PluginListPanel></PluginListPanel>
-        <Content className={classNames('content', {pc: pageInfo?.platform === 'PC', h5: pageInfo?.platform === 'H5', })}>
+        <Content
+          className={classNames('content', { pc: pageInfo?.platform === 'PC', h5: pageInfo?.platform === 'H5' })}
+        >
           <Canvas></Canvas>
         </Content>
         <PropsEditorPanel />
@@ -69,13 +91,3 @@ function Editor() {
     </context.Provider>
   )
 }
-
-function App() {
-  return (
-    <div className="App">
-      <Editor />
-    </div>
-  )
-}
-
-export default App
